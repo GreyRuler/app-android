@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/common_spacing">
+
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="@dimen/post_avatar_size"
+        android:layout_height="@dimen/post_avatar_size"
+        android:contentDescription="@string/author_avatar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/titlePost"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/common_spacing"
+        android:layout_marginEnd="@dimen/common_spacing"
+        android:ellipsize="end"
+        android:singleLine="true"
+        app:layout_constraintBottom_toTopOf="@id/date"
+        app:layout_constraintEnd_toStartOf="@id/options"
+        app:layout_constraintStart_toEndOf="@id/avatar"
+        app:layout_constraintTop_toTopOf="@id/avatar"
+        tools:text="Нетология. Университет интернет-профессий" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:singleLine="true"
+        app:layout_constraintBottom_toBottomOf="@id/avatar"
+        app:layout_constraintEnd_toEndOf="@id/titlePost"
+        app:layout_constraintStart_toStartOf="@id/titlePost"
+        app:layout_constraintTop_toBottomOf="@id/titlePost"
+        tools:text="9 апреля в 17.09" />
+
+    <ImageButton
+        android:id="@+id/options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/button"
+        android:src="@drawable/ic_baseline_more_vert_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/headerBarrier"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:barrierDirection="bottom"
+        app:barrierMargin="@dimen/common_spacing"
+        app:constraint_referenced_ids="avatar, date, options" />
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/common_spacing"
+        app:layout_constraintTop_toBottomOf="@id/headerBarrier"
+        tools:text="@tools:sample/lorem" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/footerBarrier"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:barrierMargin="@dimen/common_spacing"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="text" />
+
+    <ImageButton
+        android:id="@+id/likeIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/like"
+        android:src="@drawable/ic_baseline_favorite_border_24"
+        android:layout_marginTop="@dimen/common_spacing"
+        app:layout_constraintTop_toBottomOf="@id/footerBarrier" />
+
+    <TextView
+        android:id="@+id/countLike"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_spacing"
+        app:layout_constraintStart_toEndOf="@id/likeIcon"
+        app:layout_constraintTop_toTopOf="@id/likeIcon"
+        app:layout_constraintBottom_toBottomOf="@id/likeIcon"
+        tools:text="10"/>
+
+    <ImageButton
+        android:id="@+id/shareIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_baseline_share_24"
+        android:contentDescription="@string/share"
+        android:layout_marginTop="@dimen/common_spacing"
+        app:layout_constraintTop_toBottomOf="@id/footerBarrier"
+        app:layout_constraintStart_toEndOf="@id/countLike"
+        android:layout_marginStart="@dimen/common_spacing"/>
+
+    <TextView
+        android:id="@+id/countShare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_spacing"
+        app:layout_constraintStart_toEndOf="@id/shareIcon"
+        app:layout_constraintTop_toTopOf="@id/shareIcon"
+        app:layout_constraintBottom_toBottomOf="@id/shareIcon"
+        tools:text="5"/>
+
+    <ImageButton
+        android:id="@+id/visibility"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_visibility_24"
+        android:background="@android:color/transparent"
+        android:layout_marginTop="@dimen/common_spacing"
+        android:layout_marginEnd="@dimen/small_spacing"
+        app:layout_constraintTop_toBottomOf="@id/footerBarrier"
+        app:layout_constraintEnd_toStartOf="@id/countVisibility"
+        android:contentDescription="@string/visibility" />
+
+    <TextView
+        android:id="@+id/countVisibility"
+        android:layout_width="24dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/visibility"
+        app:layout_constraintBottom_toBottomOf="@id/visibility"
+        tools:text="5"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
