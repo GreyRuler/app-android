@@ -6,29 +6,43 @@ import ru.netology.nmedia.repo.PostRepository
 
 class InMemoryPostRepository : PostRepository {
 
+    private val posts get() = checkNotNull(data.value) {
+        "Data value should not be null"
+    }
+
     override val data = MutableLiveData(
-        Post(
-            id = 1,
-            author = "Нетология. Университет интернет-профессий будущего",
-            content = "Привет, это новая Нетология. Когда-то Нетология начиналась с интенссивов",
-            published = "21 мая в 18:36",
-            likeByMe = false,
-            countLike = 999,
-            countShare = 0
-        )
+        List(10) { index ->
+            Post(
+                id = index + 1L,
+                author = "Нетология. Университет интернет-профессий будущего",
+                content = "Some random content $index",
+                published = "19 апреля в 18:36",
+                likeByMe = false,
+                countLike = 999,
+                countShare = 0
+            )
+        }
     )
 
-    override fun like(): String {
-        val currentPost = checkNotNull(data.value) {
-
+    override fun like(postID: Long): String {
+        data.value = posts.map {
+            if (it.id != postID) it
+            else {
+                it.copy(
+                    likeByMe = !it.likeByMe,
+                    countLike = it.countLike + boolLikeByMe(it)
+                )
+            }
         }
-        val post = currentPost.copy(
-            likeByMe = !currentPost.likeByMe
-        )
-        data.value = post
-        if (post.likeByMe) post.countLike += 1 else post.countLike -= 1
-        return conversionCountLike(post.countLike)
+        val posts = checkNotNull(data.value)
+        val post = posts.find { it.id == postID }
+        return conversionCountLike(post!!.countLike)
     }
+
+    private fun boolLikeByMe(post: Post): Int {
+        return if (post.likeByMe) 1 else -1
+    }
+
 
     private fun conversionCountLike(countLike: Int): String {
         return when (countLike) {
@@ -41,14 +55,11 @@ class InMemoryPostRepository : PostRepository {
         }
     }
 
-    override fun share(): String {
-        val currentPost = checkNotNull(data.value) {
-
+    override fun share(postID: Long): String {
+        data.value = posts.map {
+            if (it.id != postID) it
+            else it.copy(countShare = it.countShare)
         }
-        val post = currentPost.copy(
-            countShare = currentPost.countShare + 1
-        )
-        data.value = post
-        return "${post.countShare}"
+        return "${data.value!!.find { it.id == postID }!!.countShare}"
     }
 }
