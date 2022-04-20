@@ -18,15 +18,17 @@ internal class PostsAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = PostBinding.inflate(inflater, parent, false)
-        return ViewHolder(binding)
+        return ViewHolder(binding, onLikeClicked, onShareClicked)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    inner class ViewHolder(
-        private val binding: PostBinding
+    class ViewHolder(
+        private val binding: PostBinding,
+        onLikeClicked: (Post) -> String,
+        onShareClicked: (Post) -> String
     ) : RecyclerView.ViewHolder(binding.root) {
 
         private lateinit var post: Post
@@ -35,8 +37,6 @@ internal class PostsAdapter(
             with(binding) {
                 like.setOnClickListener {
                     countLike.text = onLikeClicked(post)
-                    onLikeClicked(post)
-                    like.setImageResource(getLikeIconResID(post.likeByMe))
                 }
                 share.setOnClickListener {
                     countShare.text = onShareClicked(post)
@@ -44,11 +44,14 @@ internal class PostsAdapter(
             }
         }
 
-        fun bind(post: Post) = with(binding) {
-            author.text = post.author
-            published.text = post.published
-            content.text = post.content
-            like.setImageResource(getLikeIconResID(post.likeByMe))
+        fun bind(post: Post) {
+            this.post = post
+            with(binding) {
+                author.text = post.author
+                published.text = post.published
+                content.text = post.content
+                like.setImageResource(getLikeIconResID(post.likeByMe))
+            }
         }
 
         @DrawableRes

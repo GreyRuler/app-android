@@ -11,7 +11,7 @@ class InMemoryPostRepository : PostRepository {
     }
 
     override val data = MutableLiveData(
-        List(10) { index ->
+        List(1000) { index ->
             Post(
                 id = index + 1L,
                 author = "Нетология. Университет интернет-профессий будущего",
@@ -29,18 +29,15 @@ class InMemoryPostRepository : PostRepository {
             if (it.id != postID) it
             else {
                 it.copy(
-                    likeByMe = !it.likeByMe,
-                    countLike = it.countLike + boolLikeByMe(it)
+                    likeByMe = !it.likeByMe
                 )
             }
         }
-        val posts = checkNotNull(data.value)
-        val post = posts.find { it.id == postID }
-        return conversionCountLike(post!!.countLike)
+        return conversionCountLike(data.value!!.find { it.id == postID }!!.countLike)
     }
 
-    private fun boolLikeByMe(post: Post): Int {
-        return if (post.likeByMe) 1 else -1
+    private fun boolLikeByMe(likeByMe: Boolean): Int {
+        return if (likeByMe) 1 else -1
     }
 
 
@@ -58,7 +55,7 @@ class InMemoryPostRepository : PostRepository {
     override fun share(postID: Long): String {
         data.value = posts.map {
             if (it.id != postID) it
-            else it.copy(countShare = it.countShare)
+            else it.copy(countShare = (it.countShare + 1))
         }
         return "${data.value!!.find { it.id == postID }!!.countShare}"
     }
