@@ -24,39 +24,26 @@ class InMemoryPostRepository : PostRepository {
         }
     )
 
-    override fun like(postID: Long): String {
+    override fun like(postID: Long) {
         data.value = posts.map {
             if (it.id != postID) it
             else {
                 it.copy(
-                    likeByMe = !it.likeByMe
+                    likeByMe = !it.likeByMe,
+                    countLike = boolLikeByMe(it.countLike, !it.likeByMe)
                 )
             }
         }
-        return conversionCountLike(data.value!!.find { it.id == postID }!!.countLike)
     }
 
-    private fun boolLikeByMe(likeByMe: Boolean): Int {
-        return if (likeByMe) 1 else -1
+    private fun boolLikeByMe(countLike: Int, likeByMe: Boolean): Int {
+        return if (likeByMe) countLike + 1 else countLike - 1
     }
 
-
-    private fun conversionCountLike(countLike: Int): String {
-        return when (countLike) {
-            in 0..999 -> "$countLike"
-            in 1_000..1_099 -> "1K"
-            in 1_100..9_999 -> "${countLike / 1000}.${countLike / 100 % 10}K"
-            in 10_000..999_999 -> "${countLike / 1000}K"
-            in 1_000_000..1_099_999 -> "1M"
-            else -> "${countLike / 1_000_000}.${countLike / 100_000 % 10}M"
-        }
-    }
-
-    override fun share(postID: Long): String {
+    override fun share(postID: Long) {
         data.value = posts.map {
             if (it.id != postID) it
-            else it.copy(countShare = (it.countShare + 1))
+            else it.copy(countShare = it.countShare + 1)
         }
-        return "${data.value!!.find { it.id == postID }!!.countShare}"
     }
 }

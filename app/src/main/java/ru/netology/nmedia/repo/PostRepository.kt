@@ -7,7 +7,7 @@ interface PostRepository {
 
     val data: LiveData<List<Post>>
 
-    fun like (postID: Long): String
+    fun like (postID: Long)
 
-    fun share (postID: Long): String
+    fun share (postID: Long)
 }

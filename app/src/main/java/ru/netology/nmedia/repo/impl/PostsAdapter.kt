@@ -11,8 +11,8 @@ import ru.netology.nmedia.R
 import ru.netology.nmedia.databinding.PostBinding
 
 internal class PostsAdapter(
-    private val onLikeClicked: (Post) -> String,
-    private val onShareClicked: (Post) -> String
+    private val onLikeClicked: (Post) -> Unit,
+    private val onShareClicked: (Post) -> Unit
 ) : ListAdapter<Post, PostsAdapter.ViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -25,10 +25,10 @@ internal class PostsAdapter(
         holder.bind(getItem(position))
     }
 
-    class ViewHolder(
+    inner class ViewHolder(
         private val binding: PostBinding,
-        onLikeClicked: (Post) -> String,
-        onShareClicked: (Post) -> String
+        onLikeClicked: (Post) -> Unit,
+        onShareClicked: (Post) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
         private lateinit var post: Post
@@ -36,10 +36,10 @@ internal class PostsAdapter(
         init {
             with(binding) {
                 like.setOnClickListener {
-                    countLike.text = onLikeClicked(post)
+                     onLikeClicked(post)
                 }
                 share.setOnClickListener {
-                    countShare.text = onShareClicked(post)
+                     onShareClicked(post)
                 }
             }
         }
@@ -50,7 +50,20 @@ internal class PostsAdapter(
                 author.text = post.author
                 published.text = post.published
                 content.text = post.content
+                countLike.text = conversionCountLike(post.countLike)
                 like.setImageResource(getLikeIconResID(post.likeByMe))
+                countShare.text = post.countShare.toString()
+            }
+        }
+
+        private fun conversionCountLike(countLike: Int): String {
+            return when (countLike) {
+                in 0..999 -> "$countLike"
+                in 1_000..1_099 -> "1K"
+                in 1_100..9_999 -> "${countLike / 1000}.${countLike / 100 % 10}K"
+                in 10_000..999_999 -> "${countLike / 1000}K"
+                in 1_000_000..1_099_999 -> "1M"
+                else -> "${countLike / 1_000_000}.${countLike / 100_000 % 10}M"
             }
         }
 
