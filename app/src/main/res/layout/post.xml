@@ -66,7 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_spacing"
         app:layout_constraintTop_toBottomOf="@id/headerBarrier"
-        tools:text="@tools:sample/lorem" />
+        tools:text="@tools:sample/lorem/random" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/footerBarrier"
@@ -82,7 +82,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:contentDescription="@string/like"
-        android:src="@drawable/ic_baseline_favorite_border_24"
+        android:src="@drawable/ic_like_24"
         android:layout_marginTop="@dimen/common_spacing"
         app:layout_constraintTop_toBottomOf="@id/footerBarrier" />
 
