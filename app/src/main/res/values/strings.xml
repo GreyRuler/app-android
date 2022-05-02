@@ -6,4 +6,9 @@
     <string name="like">Like</string>
     <string name="share">Share</string>
     <string name="visibility">Visibility</string>
+    <string name="remove">Remove</string>
+    <string name="post_text">Post Text</string>
+    <string name="menu_edit">Edit</string>
+    <string name="description_post_like">Like</string>
+    <string name="edit_message">Edit Message</string>
 </resources>

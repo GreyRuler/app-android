@@ -6,12 +6,15 @@ import ru.netology.nmedia.repo.PostRepository
 
 class InMemoryPostRepository : PostRepository {
 
-    private val posts get() = checkNotNull(data.value) {
-        "Data value should not be null"
-    }
+    private var nextId = GENERATED_POSTS_AMOUNT.toLong()
+
+    private val posts
+        get() = checkNotNull(data.value) {
+            "Data value should not be null"
+        }
 
     override val data = MutableLiveData(
-        List(1000) { index ->
+        List(GENERATED_POSTS_AMOUNT) { index ->
             Post(
                 id = index + 1L,
                 author = "Нетология. Университет интернет-профессий будущего",
@@ -45,5 +48,29 @@ class InMemoryPostRepository : PostRepository {
             if (it.id != postID) it
             else it.copy(countShare = it.countShare + 1)
         }
+    }
+
+    override fun delete(postID: Long) {
+        data.value = posts.filterNot { it.id == postID }
+    }
+
+    override fun save(post: Post) {
+        if (post.id == PostRepository.NEW_POST_ID) insert(post) else update(post)
+    }
+
+    private fun insert(post: Post) {
+        data.value = listOf(
+            post.copy(id = ++nextId)
+        ) + posts
+    }
+
+    private fun update(post: Post) {
+        data.value = posts.map {
+            if (post.id == it.id) post else it
+        }
+    }
+
+    private companion object {
+        const val GENERATED_POSTS_AMOUNT = 1_000
     }
 }
