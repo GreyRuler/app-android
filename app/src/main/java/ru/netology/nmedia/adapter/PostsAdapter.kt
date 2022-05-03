@@ -61,6 +61,7 @@ internal class PostsAdapter(
                 share.setOnClickListener {
                      listener.onShareClicked(post)
                 }
+                options.setOnClickListener { popupMenu.show() }
             }
         }
 
@@ -73,7 +74,6 @@ internal class PostsAdapter(
                 countLike.text = conversionCountLike(post.countLike)
                 like.setImageResource(getLikeIconResID(post.likeByMe))
                 countShare.text = post.countShare.toString()
-                options.setOnClickListener { popupMenu.show() }
             }
         }
 
