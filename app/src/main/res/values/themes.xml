@@ -13,4 +13,25 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Widget.AppTheme.LikeCheckbox" parent="Widget.MaterialComponents.Button.TextButton.Icon">
+        <item name="icon">@drawable/ic_like_24dp</item>
+        <item name="iconTint">@color/like_checkbox_tint</item>
+        <item name="android:minWidth">@dimen/normal_spacing</item>
+        <item name="android:minHeight">@dimen/normal_spacing</item>
+    </style>
+
+    <style name="Widget.AppTheme.ShareCheckbox" parent="Widget.MaterialComponents.Button.TextButton.Icon">
+        <item name="icon">@drawable/ic_baseline_share_24</item>
+        <item name="iconTint">@color/share_tint</item>
+        <item name="android:minWidth">@dimen/normal_spacing</item>
+        <item name="android:minHeight">@dimen/normal_spacing</item>
+    </style>
+
+    <style name="Widget.AppTheme.OptionsCheckbox" parent="Widget.MaterialComponents.Button.TextButton.Icon">
+        <item name="icon">@drawable/ic_baseline_more_vert_24</item>
+        <item name="iconTint">@color/options_tint</item>
+        <item name="android:minWidth">@dimen/normal_spacing</item>
+        <item name="android:minHeight">@dimen/normal_spacing</item>
+    </style>
 </resources>

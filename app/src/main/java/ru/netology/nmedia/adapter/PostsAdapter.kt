@@ -71,9 +71,9 @@ internal class PostsAdapter(
                 author.text = post.author
                 published.text = post.published
                 content.text = post.content
-                countLike.text = conversionCountLike(post.countLike)
-                like.setImageResource(getLikeIconResID(post.likeByMe))
-                countShare.text = post.countShare.toString()
+                like.text = conversionCountLike(post.countLike)
+                like.isChecked = post.likeByMe
+                share.text = post.countShare.toString()
             }
         }
 
@@ -87,10 +87,6 @@ internal class PostsAdapter(
                 else -> "${countLike / 1_000_000}.${countLike / 100_000 % 10}M"
             }
         }
-
-        @DrawableRes
-        fun getLikeIconResID(liked: Boolean) =
-            if (liked) R.drawable.ic_liked_24_red else R.drawable.ic_like_24
     }
 
     private object DiffCallback : DiffUtil.ItemCallback<Post>() {
