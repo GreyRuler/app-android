@@ -40,6 +40,7 @@ class InMemoryPostRepository : PostRepository {
         return if (likeByMe) countLike + 1 else countLike - 1
     }
 
+
     override fun share(postID: Long) {
         data.value = posts.map {
             if (it.id != postID) it
