@@ -7,4 +7,9 @@
     <string name="like">Лайкнуть</string>
     <string name="share">Поделиться</string>
     <string name="visibility">Просмотры</string>
+    <string name="remove">Удалить</string>
+    <string name="menu_edit">Изменить</string>
+    <string name="post_text">Текст поста</string>
+    <string name="description_post_like">Нравится</string>
+    <string name="edit_message">Редактирование</string>
 </resources>
