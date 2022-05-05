@@ -4,110 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/postsRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/toolsTopBarrier"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:context=".MainActivity"
-        tools:layout_editor_absoluteX="0dp"
         tools:listitem="@layout/post" />
 
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/toolsTopBarrier"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:barrierDirection="top"
-        app:constraint_referenced_ids="groupEditMode,closeEditModeButton" />
-
-    <EditText
-        android:id="@+id/contentEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:hint="@string/post_text"
-        android:importantForAutofill="no"
-        android:inputType="textMultiLine"
-        android:padding="@dimen/common_spacing"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/saveButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/groupEditMode" />
-
-    <ImageButton
-        android:id="@+id/saveButton"
-        android:layout_width="@dimen/normal_spacing"
-        android:layout_height="@dimen/normal_spacing"
-        android:layout_marginTop="@dimen/common_spacing"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/description_post_like"
-
+        android:layout_margin="@dimen/fab_margin"
+        android:contentDescription="@string/add_post"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/contentEditText"
-        app:srcCompat="@drawable/done_black_24dp_foreground" />
-
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/groupEditMode"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="gone"
-        app:constraint_referenced_ids="penEditMode, closeEditModeButton, editMessage, textEditMessage"
-        app:layout_constraintBottom_toTopOf="@id/contentEditText"
-        app:layout_constraintEnd_toStartOf="@id/closeEditModeButton"
-        app:layout_constraintTop_toTopOf="@id/toolsTopBarrier"
-        app:layout_constraintStart_toEndOf="@id/penEditMode"/>
-
-    <ImageView
-        android:id="@+id/penEditMode"
-        android:layout_width="@dimen/normal_spacing"
-        android:layout_height="@dimen/normal_spacing"
-        android:layout_marginTop="@dimen/common_spacing"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/description_post_like"
-        app:layout_constraintBottom_toBottomOf="@id/groupEditMode"
-        app:layout_constraintEnd_toStartOf="@id/groupEditMode"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/pen_24dp_foreground" />
-
-    <ImageButton
-        android:id="@+id/closeEditModeButton"
-        android:layout_width="@dimen/normal_spacing"
-        android:layout_height="@dimen/normal_spacing"
-        android:layout_marginTop="@dimen/common_spacing"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/description_post_like"
-        app:layout_constraintBottom_toBottomOf="@id/groupEditMode"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/groupEditMode"
-        app:srcCompat="@drawable/close_24dp_foreground" />
-
-    <TextView
-        android:id="@+id/editMessage"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:singleLine="true"
-        android:text="@string/edit_message"
-        app:layout_constraintTop_toTopOf="@id/groupEditMode"
-        app:layout_constraintBottom_toTopOf="@id/textEditMessage"
-        app:layout_constraintStart_toEndOf="@id/penEditMode"
-        app:layout_constraintEnd_toStartOf="@id/closeEditModeButton" />
-
-    <TextView
-        android:id="@+id/textEditMessage"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ellipsize="end"
-        android:singleLine="true"
-        app:layout_constraintBottom_toBottomOf="@id/groupEditMode"
-        app:layout_constraintTop_toBottomOf="@id/editMessage"
-        app:layout_constraintStart_toEndOf="@id/penEditMode"
-        app:layout_constraintEnd_toStartOf="@id/closeEditModeButton"
-        tools:text="@tools:sample/lorem/random" />
+        app:srcCompat="@drawable/ic_add_24dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

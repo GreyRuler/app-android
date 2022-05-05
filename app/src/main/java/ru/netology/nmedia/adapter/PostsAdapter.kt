@@ -48,7 +48,6 @@ internal class PostsAdapter(
                         }
                         else -> false
                     }
-
                 }
             }
         }
