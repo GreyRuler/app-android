@@ -1,6 +1,7 @@
 package ru.netology.nmedia.activity
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -62,6 +63,14 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.navigateToPostContentScreen.observe(this) {
             postContentActivityLauncher.launch(null)
+        }
+
+        viewModel.uri.observe(this) {
+            val intent = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("https://www.youtube.com/watch?v=qRTVg8HHzUo")
+            )
+            startActivity(intent)
         }
     }
 }

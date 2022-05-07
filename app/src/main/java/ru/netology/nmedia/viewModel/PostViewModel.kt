@@ -17,6 +17,7 @@ class PostViewModel : ViewModel(), PostInteractionListener {
     val sharePostContent = SingleLiveEvent<String>()
     val navigateToPostContentScreen = SingleLiveEvent<Unit>()
     val editText = SingleLiveEvent<String>()
+    val uri = SingleLiveEvent<String>()
     private val currentPost = MutableLiveData<Post?>(null)
 
     fun onSaveButtonClicked(content: String) {
@@ -40,6 +41,11 @@ class PostViewModel : ViewModel(), PostInteractionListener {
     }
 
     // region PostInteractionListener
+
+    override fun onPlayClicked(post: Post) {
+        uri.call()
+    }
+
     override fun onRemoveClicked(post: Post) =
         repository.delete(post.id)
 
@@ -54,5 +60,6 @@ class PostViewModel : ViewModel(), PostInteractionListener {
     override fun onShareClicked(post: Post) {
         sharePostContent.value = post.content
     }
+
     // endregion PostInteractionListener
 }

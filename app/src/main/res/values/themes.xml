@@ -34,4 +34,12 @@
         <item name="android:minWidth">@dimen/normal_spacing</item>
         <item name="android:minHeight">@dimen/normal_spacing</item>
     </style>
+
+    <style name="Widget.AppTheme.PlayVideoCheckbox" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="android:src">@drawable/ic_play_24dp</item>
+        <item name="backgroundTint">@color/white</item>
+        <item name="borderWidth">0dp</item>
+        <item name="android:minWidth">@dimen/normal_spacing</item>
+        <item name="android:minHeight">@dimen/normal_spacing</item>
+    </style>
 </resources>

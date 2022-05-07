@@ -37,7 +37,7 @@ internal class PostsAdapter(
             PopupMenu(itemView.context, binding.options).apply {
                 inflate(R.menu.options_post)
                 setOnMenuItemClickListener { menuItem ->
-                    when(menuItem.itemId) {
+                    when (menuItem.itemId) {
                         R.id.remove -> {
                             listener.onRemoveClicked(post)
                             true
@@ -55,12 +55,18 @@ internal class PostsAdapter(
         init {
             with(binding) {
                 like.setOnClickListener {
-                     listener.onLikeClicked(post)
+                    listener.onLikeClicked(post)
                 }
                 share.setOnClickListener {
-                     listener.onShareClicked(post)
+                    listener.onShareClicked(post)
                 }
                 options.setOnClickListener { popupMenu.show() }
+                groupPreviewVideo.setOnClickListener {
+                    listener.onPlayClicked(post)
+                }
+                playVideo.setOnClickListener {
+                    listener.onPlayClicked(post)
+                }
             }
         }
 

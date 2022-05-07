@@ -70,13 +70,54 @@
         app:layout_constraintTop_toBottomOf="@id/headerBarrier"
         tools:text="@tools:sample/lorem" />
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/groupPreviewVideo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:constraint_referenced_ids="previewVideo, playVideo, urlVideo"
+        app:layout_constraintBottom_toTopOf="@+id/footerBarrier"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/content" />
+
+    <ImageView
+        android:id="@+id/previewVideo"
+        android:layout_width="wrap_content"
+        android:layout_height="214dp"
+        android:contentDescription="@string/preview_video"
+        android:src="@drawable/pier"
+        app:layout_constraintBottom_toTopOf="@+id/urlVideo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/content" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/playVideo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/play_video"
+        style="@style/Widget.AppTheme.PlayVideoCheckbox"
+        app:layout_constraintBottom_toBottomOf="@+id/groupPreviewVideo"
+        app:layout_constraintEnd_toEndOf="@+id/groupPreviewVideo"
+        app:layout_constraintStart_toStartOf="@+id/groupPreviewVideo"
+        app:layout_constraintTop_toTopOf="@+id/groupPreviewVideo" />
+
+    <TextView
+        android:id="@+id/urlVideo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="https://www.youtube.com/watch?v=qRTVg8HHzUo"
+        app:layout_constraintTop_toBottomOf="@+id/previewVideo"
+        app:layout_constraintBottom_toBottomOf="@+id/groupPreviewVideo"/>
+
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/footerBarrier"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
         app:barrierMargin="@dimen/common_spacing"
-        app:constraint_referenced_ids="content" />
+        app:constraint_referenced_ids="groupPreviewVideo" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/like"
