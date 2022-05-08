@@ -17,4 +17,5 @@
     <string name="description_post_save">Сохранить</string>
     <string name="play_video">Воспроизвести видео</string>
     <string name="preview_video">Превью для видео</string>
+    <string name="url">Ссылка</string>
 </resources>

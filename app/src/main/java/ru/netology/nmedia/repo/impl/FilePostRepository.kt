@@ -6,9 +6,6 @@ import androidx.core.content.edit
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import ru.netology.nmedia.Post
 import ru.netology.nmedia.repo.PostRepository
 import kotlin.properties.Delegates
@@ -100,7 +97,6 @@ class FilePostRepository(
     }
 
     private companion object {
-        const val POSTS_PREFS_KEY = "posts"
         const val NEXT_ID_PREFS_KEY = "nextID"
         const val FILE_NAME = "posts.json"
     }

@@ -79,6 +79,10 @@ internal class PostsAdapter(
                 like.text = conversionCountLike(post.countLike)
                 like.isChecked = post.likeByMe
                 share.text = post.countShare.toString()
+                if (!post.url.isNullOrBlank()) {
+                    urlVideo.text = post.url
+                    groupPreviewVideo.visibility = View.VISIBLE
+                } else groupPreviewVideo.visibility = View.GONE
             }
         }
 

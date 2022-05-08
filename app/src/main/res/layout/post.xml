@@ -14,7 +14,8 @@
         android:contentDescription="@string/author_avatar"
         android:src="@drawable/ic_launcher_foreground"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <TextView
         android:id="@+id/author"
@@ -74,7 +75,7 @@
         android:id="@+id/groupPreviewVideo"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:constraint_referenced_ids="previewVideo, playVideo, urlVideo"
         app:layout_constraintBottom_toTopOf="@+id/footerBarrier"
         app:layout_constraintEnd_toEndOf="parent"

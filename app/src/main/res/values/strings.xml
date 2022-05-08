@@ -16,4 +16,5 @@
     <string name="description_post_save">Save</string>
     <string name="play_video">Play video</string>
     <string name="preview_video">preview video</string>
+    <string name="url">URL</string>
 </resources>

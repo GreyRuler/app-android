@@ -23,21 +23,23 @@ class PostViewModel(
 
     val sharePostContent = SingleLiveEvent<String>()
     val navigateToPostContentScreen = SingleLiveEvent<Unit>()
-    val editText = SingleLiveEvent<String>()
+    val editPost = SingleLiveEvent<Post>()
     val uri = SingleLiveEvent<String>()
     private val currentPost = MutableLiveData<Post?>(null)
 
-    fun onSaveButtonClicked(content: String) {
-        if (content.isBlank()) return
+    fun onSaveButtonClicked(content: List<String?>) {
+        if (content.isNullOrEmpty()) return
         val post = currentPost.value?.copy(
-            content = content
+            content = content[0]!!,
+            url = content[1]
         ) ?: Post(
             id = PostRepository.NEW_POST_ID,
             author = "Me",
-            content = content,
+            content = content[0]!!,
             published = "Today",
             countLike = 0,
-            countShare = 0
+            countShare = 0,
+            url = content[1]
         )
         repository.save(post)
         currentPost.value = null
@@ -50,7 +52,7 @@ class PostViewModel(
     // region PostInteractionListener
 
     override fun onPlayClicked(post: Post) {
-        uri.call()
+        uri.value = post.url!!
     }
 
     override fun onRemoveClicked(post: Post) =
@@ -58,7 +60,7 @@ class PostViewModel(
 
     override fun onEditClicked(post: Post) {
         currentPost.value = post
-        editText.value = post.content
+        editPost.value = post
     }
 
     override fun onLikeClicked(post: Post) =

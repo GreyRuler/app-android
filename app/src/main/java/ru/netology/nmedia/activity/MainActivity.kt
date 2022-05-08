@@ -51,18 +51,18 @@ class MainActivity : AppCompatActivity() {
             viewModel.onSaveButtonClicked(postContent)
         }
 
-        viewModel.editText.observe(this) { postContent ->
-            postContentActivityLauncher.launch(postContent)
+        viewModel.editPost.observe(this) { post ->
+            postContentActivityLauncher.launch(listOf(post?.content, post?.url))
         }
 
         viewModel.navigateToPostContentScreen.observe(this) {
             postContentActivityLauncher.launch(null)
         }
 
-        viewModel.uri.observe(this) {
+        viewModel.uri.observe(this) { url ->
             val intent = Intent(
                 Intent.ACTION_VIEW,
-                Uri.parse("https://www.youtube.com/watch?v=qRTVg8HHzUo")
+                Uri.parse(url)
             )
             startActivity(intent)
         }

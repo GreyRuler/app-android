@@ -22,7 +22,8 @@ class InMemoryPostRepository : PostRepository {
                 published = "19 апреля в 18:36",
                 likeByMe = false,
                 countLike = 999,
-                countShare = 0
+                countShare = 0,
+                url = null
             )
         }
     )
