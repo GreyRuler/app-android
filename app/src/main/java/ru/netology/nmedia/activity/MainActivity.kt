@@ -49,16 +49,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         viewModel.editText.observe(this) { postContent ->
-            // Говорим между какими Activity будет происходить связь
-            val intent =  Intent(
-                this, PostContentActivity::class.java
-            ).apply {
-                action = Intent.ACTION_SEND
-                putExtra(Intent.EXTRA_TEXT, postContent)
-                type = "text/plain"
-            }
-
-            postContentActivityLauncher.launch(intent)
+            postContentActivityLauncher.launch(postContent)
         }
 
         viewModel.navigateToPostContentScreen.observe(this) {

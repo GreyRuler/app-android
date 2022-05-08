@@ -32,10 +32,12 @@ class PostContentActivity : AppCompatActivity() {
         }
     }
 
-    object ResultContract : ActivityResultContract<Intent?, String?>() {
+    object ResultContract : ActivityResultContract<String?, String?>() {
 
-        override fun createIntent(context: Context, input: Intent?) =
-            input ?: Intent(context, PostContentActivity::class.java)
+        override fun createIntent(context: Context, input: String?) =
+            Intent(context, PostContentActivity::class.java).apply {
+                putExtra(Intent.EXTRA_TEXT, input)
+            }
 
         override fun parseResult(resultCode: Int, intent: Intent?) =
             if (resultCode == Activity.RESULT_OK) {
