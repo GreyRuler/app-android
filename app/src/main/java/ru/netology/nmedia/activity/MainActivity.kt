@@ -22,12 +22,15 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = PostsAdapter(viewModel)
         binding.postsRecyclerView.adapter = adapter
+
         viewModel.data.observe(this) { posts ->
             adapter.submitList(posts)
         }
+
         binding.fab.setOnClickListener {
             viewModel.onAddClicked()
         }
+
         viewModel.sharePostContent.observe(this) { postContent ->
             val intent = Intent().apply {
                 action = Intent.ACTION_SEND
