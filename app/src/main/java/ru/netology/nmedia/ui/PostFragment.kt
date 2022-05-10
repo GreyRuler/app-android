@@ -54,7 +54,7 @@ class PostFragment : Fragment() {
             findNavController().navigate(direction)
         }
 
-        viewModel.navigateToPostScreen.observe(this) {
+        viewModel.backRemovedListener.observe(this) {
             findNavController().popBackStack()
         }
 
@@ -74,9 +74,12 @@ class PostFragment : Fragment() {
     ) = PostFragmentBinding.inflate(
         layoutInflater, container, false
     ).also { binding ->
-        val holder = PostsAdapter.ViewHolder(binding, viewModel)
         viewModel.data.observe(viewLifecycleOwner) {
-            holder.bind(args.post)
+            val currentPost = it.find { post ->
+                post.id == args.post.id
+            }
+            val holder = PostsAdapter.ViewHolder(binding, viewModel)
+            holder.bind(currentPost!!)
         }
     }.root
 }

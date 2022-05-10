@@ -20,7 +20,7 @@ class PostFragmentViewModel(
 
     val sharePostContent = SingleLiveEvent<String>()
     val navigateToPostContentScreen = SingleLiveEvent<Post>()
-    val navigateToPostScreen = SingleLiveEvent<Post>()
+    val backRemovedListener = SingleLiveEvent<Post>()
     val uri = SingleLiveEvent<String>()
 
     private val currentPost = MutableLiveData<Post?>(null)
@@ -51,7 +51,7 @@ class PostFragmentViewModel(
 
     override fun onRemoveClicked(post: Post) {
         repository.delete(post.id)
-        navigateToPostScreen.call()
+        backRemovedListener.call()
     }
 
     override fun onEditClicked(post: Post) {
