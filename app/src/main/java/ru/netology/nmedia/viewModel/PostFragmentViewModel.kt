@@ -9,7 +9,7 @@ import ru.netology.nmedia.repo.PostRepository
 import ru.netology.nmedia.repo.impl.FilePostRepository
 import ru.netology.nmedia.util.SingleLiveEvent
 
-class PostViewModel(
+class PostFragmentViewModel(
     application: Application
 ) : AndroidViewModel(application), PostInteractionListener {
 
@@ -22,6 +22,7 @@ class PostViewModel(
     val navigateToPostContentScreen = SingleLiveEvent<Post>()
     val navigateToPostScreen = SingleLiveEvent<Post>()
     val uri = SingleLiveEvent<String>()
+
     private val currentPost = MutableLiveData<Post?>(null)
 
     fun onSaveButtonClicked(content: String, url: String?) {
@@ -42,18 +43,16 @@ class PostViewModel(
         currentPost.value = null
     }
 
-    fun onAddClicked() {
-        navigateToPostContentScreen.call()
-    }
-
     // region PostInteractionListener
 
     override fun onPlayClicked(post: Post) {
         uri.value = post.url!!
     }
 
-    override fun onRemoveClicked(post: Post) =
+    override fun onRemoveClicked(post: Post) {
         repository.delete(post.id)
+        navigateToPostScreen.call()
+    }
 
     override fun onEditClicked(post: Post) {
         currentPost.value = post
@@ -68,7 +67,6 @@ class PostViewModel(
     }
 
     override fun onPostClicked(post: Post) {
-        navigateToPostScreen.value = post
     }
 
     // endregion PostInteractionListener
