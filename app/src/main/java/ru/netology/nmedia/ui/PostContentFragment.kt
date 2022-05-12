@@ -19,14 +19,12 @@ class PostContentFragment : Fragment() {
         savedInstanceState: Bundle?
     ) = PostContentFragmentBinding.inflate(
         layoutInflater, container, false
-    ).also { binding ->
-        with(binding) {
-            editContent.setText(args.initialContent)
-            editUrl.setText(args.initialUrl)
-            editContent.requestFocus()
-            ok.setOnClickListener {
-                onOkButtonClicked(binding)
-            }
+    ).apply {
+        editContent.setText(args.initialContent)
+        editUrl.setText(args.initialUrl)
+        editContent.requestFocus()
+        ok.setOnClickListener {
+            onOkButtonClicked(this)
         }
     }.root
 
@@ -36,7 +34,7 @@ class PostContentFragment : Fragment() {
         if (!text.isNullOrBlank() &&
             (url.contains("https://www.youtube.com/watch") || url.isNullOrBlank())
         ) {
-            val resultBundle = Bundle(1)
+            val resultBundle = Bundle(2)
             resultBundle.putString(CONTENT_KEY, text.toString())
             resultBundle.putString(URL_KEY, url.toString())
             setFragmentResult(REQUEST_KEY, resultBundle)

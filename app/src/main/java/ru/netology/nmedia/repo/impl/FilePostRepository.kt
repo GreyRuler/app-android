@@ -8,6 +8,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import ru.netology.nmedia.Post
 import ru.netology.nmedia.repo.PostRepository
+import ru.netology.nmedia.repo.SingletonRepositoryHolder
 import kotlin.properties.Delegates
 
 class FilePostRepository(
@@ -96,7 +97,7 @@ class FilePostRepository(
         }
     }
 
-    private companion object {
+    companion object : SingletonRepositoryHolder<FilePostRepository, Application>(::FilePostRepository) {
         const val NEXT_ID_PREFS_KEY = "nextID"
         const val FILE_NAME = "posts.json"
     }

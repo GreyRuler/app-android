@@ -14,7 +14,7 @@ class PostFragmentViewModel(
 ) : AndroidViewModel(application), PostInteractionListener {
 
     private val repository: PostRepository =
-        FilePostRepository(application)
+        FilePostRepository.getInstance(application)
 
     val data by repository::data
 
@@ -22,7 +22,6 @@ class PostFragmentViewModel(
     val navigateToPostContentScreen = SingleLiveEvent<Post>()
     val backRemovedListener = SingleLiveEvent<Post>()
     val uri = SingleLiveEvent<String>()
-
     private val currentPost = MutableLiveData<Post?>(null)
 
     fun onSaveButtonClicked(content: String, url: String?) {

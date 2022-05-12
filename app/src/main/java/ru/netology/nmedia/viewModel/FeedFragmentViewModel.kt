@@ -9,12 +9,12 @@ import ru.netology.nmedia.repo.PostRepository
 import ru.netology.nmedia.repo.impl.FilePostRepository
 import ru.netology.nmedia.util.SingleLiveEvent
 
-class PostViewModel(
+class FeedFragmentViewModel(
     application: Application
 ) : AndroidViewModel(application), PostInteractionListener {
 
     private val repository: PostRepository =
-        FilePostRepository(application)
+        FilePostRepository.getInstance(application)
 
     val data by repository::data
 

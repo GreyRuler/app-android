@@ -74,12 +74,12 @@ class PostFragment : Fragment() {
     ) = PostFragmentBinding.inflate(
         layoutInflater, container, false
     ).also { binding ->
-        viewModel.data.observe(viewLifecycleOwner) {
-            val currentPost = it.find { post ->
+        viewModel.data.observe(viewLifecycleOwner) { posts->
+            val currentPost = posts.find { post ->
                 post.id == args.post.id
             }
             val holder = PostsAdapter.ViewHolder(binding, viewModel)
-            holder.bind(currentPost!!)
+            if (currentPost != null) holder.bind(currentPost)
         }
     }.root
 }
