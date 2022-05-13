@@ -4,8 +4,10 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.clearFragmentResultListener
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -35,9 +37,9 @@ class FeedFragment : Fragment() {
         }
 
         setFragmentResultListener(
-            requestKey = PostContentFragment.REQUEST_KEY
+            requestKey = PostContentFragment.REQUEST_KEY_FEED_FRAGMENT
         ) { requestKey, bundle ->
-            if (requestKey != PostContentFragment.REQUEST_KEY) return@setFragmentResultListener
+            if (requestKey != PostContentFragment.REQUEST_KEY_FEED_FRAGMENT) return@setFragmentResultListener
             val postContent = bundle.getString(
                 PostContentFragment.CONTENT_KEY
             ) ?: return@setFragmentResultListener
@@ -48,7 +50,8 @@ class FeedFragment : Fragment() {
         }
 
         viewModel.navigateToPostContentScreen.observe(this) { post ->
-            val direction = FeedFragmentDirections.toPostContentFragment(post?.content, post?.url)
+            val direction = FeedFragmentDirections
+                .toPostContentFragment(post?.content, post?.url, "requestKeyFeedFragment")
             findNavController().navigate(direction)
         }
 

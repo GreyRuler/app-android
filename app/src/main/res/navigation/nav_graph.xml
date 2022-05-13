@@ -28,6 +28,9 @@
             android:name="initialUrl"
             app:argType="string"
             app:nullable="true" />
+        <argument
+            android:name="requestKey"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/postFragment"
@@ -37,7 +40,7 @@
             android:name="post"
             app:argType="ru.netology.nmedia.Post" />
         <action
-            android:id="@+id/action_postFragment_to_postContentFragment"
+            android:id="@+id/toPostContentFragment"
             app:destination="@id/postContentFragment" />
     </fragment>
 

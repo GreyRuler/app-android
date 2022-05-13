@@ -97,8 +97,15 @@ class FilePostRepository(
         }
     }
 
-    companion object : SingletonRepositoryHolder<FilePostRepository, Application>(::FilePostRepository) {
+    companion object {
+        private var instance: FilePostRepository? = null
+        fun getInstance(app: Application) = instance ?: FilePostRepository(app).also { instance = it }
         const val NEXT_ID_PREFS_KEY = "nextID"
         const val FILE_NAME = "posts.json"
     }
+
+//    companion object : SingletonRepositoryHolder<FilePostRepository, Application>(::FilePostRepository) {
+//        const val NEXT_ID_PREFS_KEY = "nextID"
+//        const val FILE_NAME = "posts.json"
+//    }
 }

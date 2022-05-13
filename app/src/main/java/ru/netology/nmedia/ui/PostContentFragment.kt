@@ -37,13 +37,14 @@ class PostContentFragment : Fragment() {
             val resultBundle = Bundle(2)
             resultBundle.putString(CONTENT_KEY, text.toString())
             resultBundle.putString(URL_KEY, url.toString())
-            setFragmentResult(REQUEST_KEY, resultBundle)
+            setFragmentResult(args.requestKey, resultBundle)
         }
         findNavController().popBackStack()
     }
 
     companion object {
-        const val REQUEST_KEY = "requestKey"
+        const val REQUEST_KEY_FEED_FRAGMENT = "requestKeyFeedFragment"
+        const val REQUEST_KEY_POST_FRAGMENT = "requestKeyPostFragment"
         const val CONTENT_KEY = "postNewContent"
         const val URL_KEY = "urlPost"
     }
