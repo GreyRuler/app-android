@@ -3,43 +3,40 @@ package ru.netology.nmedia.viewModel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import ru.netology.nmedia.Post
 import ru.netology.nmedia.adapter.PostInteractionListener
 import ru.netology.nmedia.repo.PostRepository
 import ru.netology.nmedia.repo.impl.FilePostRepository
-import ru.netology.nmedia.repo.impl.InMemoryPostRepository
-import ru.netology.nmedia.repo.impl.SharedPrefsPostRepository
 import ru.netology.nmedia.util.SingleLiveEvent
 
-class PostViewModel(
+class FeedFragmentViewModel(
     application: Application
 ) : AndroidViewModel(application), PostInteractionListener {
 
     private val repository: PostRepository =
-        FilePostRepository(application)
+        FilePostRepository.getInstance(application)
 
     val data by repository::data
 
     val sharePostContent = SingleLiveEvent<String>()
-    val navigateToPostContentScreen = SingleLiveEvent<Unit>()
-    val editPost = SingleLiveEvent<Post>()
+    val navigateToPostContentScreen = SingleLiveEvent<Post>()
+    val navigateToPostScreen = SingleLiveEvent<Post>()
     val uri = SingleLiveEvent<String>()
     private val currentPost = MutableLiveData<Post?>(null)
 
-    fun onSaveButtonClicked(content: List<String?>) {
-        if (content.isNullOrEmpty()) return
+    fun onSaveButtonClicked(content: String, url: String?) {
+        if (content.isEmpty()) return
         val post = currentPost.value?.copy(
-            content = content[0]!!,
-            url = content[1]
+            content = content,
+            url = url
         ) ?: Post(
             id = PostRepository.NEW_POST_ID,
             author = "Me",
-            content = content[0]!!,
+            content = content,
             published = "Today",
             countLike = 0,
             countShare = 0,
-            url = content[1]
+            url = url
         )
         repository.save(post)
         currentPost.value = null
@@ -60,7 +57,7 @@ class PostViewModel(
 
     override fun onEditClicked(post: Post) {
         currentPost.value = post
-        editPost.value = post
+        navigateToPostContentScreen.value = post
     }
 
     override fun onLikeClicked(post: Post) =
@@ -68,6 +65,10 @@ class PostViewModel(
 
     override fun onShareClicked(post: Post) {
         sharePostContent.value = post.content
+    }
+
+    override fun onPostClicked(post: Post) {
+        navigateToPostScreen.value = post
     }
 
     // endregion PostInteractionListener

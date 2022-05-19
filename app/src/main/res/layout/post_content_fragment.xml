@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.PostContentActivity">
+    tools:context=".ui.PostContentFragment">
 
     <EditText
         android:id="@+id/editContent"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@android:color/transparent"
+        android:gravity="top"
+        android:hint="@string/inputField"
         android:inputType="textMultiLine"
         android:padding="@dimen/common_spacing"
-
         app:layout_constraintBottom_toTopOf="@+id/editUrl"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +22,7 @@
 
     <EditText
         android:id="@+id/editUrl"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:hint="@string/url"
@@ -32,7 +33,6 @@
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editContent"
         tools:text="https://www.youtube.com/watch?v=qRTVg8HHzUo" />
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -46,8 +46,7 @@
             style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            />
+            android:layout_gravity="bottom" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/ok"
