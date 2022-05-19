@@ -34,8 +34,8 @@ class SQLiteRepository(
             if (it.id != postID) it
             else {
                 it.copy(
-                    likeByMe = !it.likeByMe,
-                    countLike = it.countLike + if (it.likeByMe) -1 else +1
+                    likedByMe = !it.likedByMe,
+                    likes = it.likes + if (it.likedByMe) -1 else +1
                 )
             }
         }
@@ -44,7 +44,7 @@ class SQLiteRepository(
     override fun share(postID: Long) {
         data.value = posts.map {
             if (it.id != postID) it
-            else it.copy(countShare = it.countShare + 1)
+            else it.copy(reposts = it.reposts + 1)
         }
     }
 

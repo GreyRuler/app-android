@@ -78,9 +78,9 @@ internal class PostsAdapter(
                 author.text = post.author
                 published.text = post.published
                 content.text = post.content
-                like.text = conversionCountLike(post.countLike)
-                like.isChecked = post.likeByMe
-                share.text = post.countShare.toString()
+                like.text = conversionCountLike(post.likes)
+                like.isChecked = post.likedByMe
+                share.text = post.reposts.toString()
                 if (!post.url.isNullOrBlank()) {
                     urlVideo.text = post.url
                     groupPreviewVideo.visibility = View.VISIBLE

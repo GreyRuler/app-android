@@ -53,10 +53,11 @@ class PostDaoImpl(
         db.execSQL(
             """
            UPDATE ${PostsTable.NAME} SET
-               likes = likes + CASE WHEN likedByMe THEN -1 ELSE 1 END,
-               likedByMe = CASE WHEN likedByMe THEN 0 ELSE 1 END
+               ${PostsTable.Column.LIKES.columnName} = ${PostsTable.Column.LIKES.columnName} + CASE WHEN ${PostsTable.Column.LIKED_BY_ME.columnName} THEN -1 ELSE 1 END,
+               ${PostsTable.Column.LIKED_BY_ME.columnName} = CASE WHEN ${PostsTable.Column.LIKED_BY_ME.columnName} THEN 0 ELSE 1 END
            WHERE id = ?;
-        """.trimIndent(), arrayOf(id)
+        """.trimIndent(),
+            arrayOf(id)
         )
     }
 

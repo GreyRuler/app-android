@@ -9,8 +9,8 @@ data class Post (
     val author: String,
     val content: String,
     val published: String,
-    val likeByMe: Boolean = false,
-    var countLike: Int,
-    var countShare: Int,
+    val likedByMe: Boolean = false,
+    var likes: Int,
+    var reposts: Int,
     var url: String?
 ) : Parcelable

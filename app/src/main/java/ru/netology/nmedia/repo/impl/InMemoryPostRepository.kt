@@ -20,9 +20,9 @@ class InMemoryPostRepository : PostRepository {
                 author = "Нетология. Университет интернет-профессий будущего",
                 content = "Some random content $index",
                 published = "19 апреля в 18:36",
-                likeByMe = false,
-                countLike = 999,
-                countShare = 0,
+                likedByMe = false,
+                likes = 999,
+                reposts = 0,
                 url = null
             )
         }
@@ -33,8 +33,8 @@ class InMemoryPostRepository : PostRepository {
             if (it.id != postID) it
             else {
                 it.copy(
-                    likeByMe = !it.likeByMe,
-                    countLike = boolLikeByMe(it.countLike, !it.likeByMe)
+                    likedByMe = !it.likedByMe,
+                    likes = boolLikeByMe(it.likes, !it.likedByMe)
                 )
             }
         }
@@ -48,7 +48,7 @@ class InMemoryPostRepository : PostRepository {
     override fun share(postID: Long) {
         data.value = posts.map {
             if (it.id != postID) it
-            else it.copy(countShare = it.countShare + 1)
+            else it.copy(reposts = it.reposts + 1)
         }
     }
 

@@ -8,8 +8,8 @@ fun Cursor.toPost() = Post(
     author = getString(getColumnIndexOrThrow(PostsTable.Column.AUTHOR.columnName)),
     content = getString(getColumnIndexOrThrow(PostsTable.Column.CONTENT.columnName)),
     published = getString(getColumnIndexOrThrow(PostsTable.Column.PUBLISHED.columnName)),
-    countLike = getInt(getColumnIndexOrThrow(PostsTable.Column.LIKES.columnName)),
-    likeByMe = getInt(getColumnIndexOrThrow(PostsTable.Column.LIKED_BY_ME.columnName)) != 0,
-    countShare = getInt(getColumnIndexOrThrow(PostsTable.Column.LIKES.columnName)),
+    likes = getInt(getColumnIndexOrThrow(PostsTable.Column.LIKES.columnName)),
+    likedByMe = getInt(getColumnIndexOrThrow(PostsTable.Column.LIKED_BY_ME.columnName)) != 0,
+    reposts = getInt(getColumnIndexOrThrow(PostsTable.Column.REPOSTS.columnName)),
     url = getString(getColumnIndexOrThrow(PostsTable.Column.PUBLISHED.columnName))
 )

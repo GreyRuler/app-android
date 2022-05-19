@@ -8,7 +8,6 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import ru.netology.nmedia.Post
 import ru.netology.nmedia.repo.PostRepository
-import ru.netology.nmedia.repo.SingletonRepositoryHolder
 import kotlin.properties.Delegates
 
 class FilePostRepository(
@@ -63,8 +62,8 @@ class FilePostRepository(
             if (it.id != postID) it
             else {
                 it.copy(
-                    likeByMe = !it.likeByMe,
-                    countLike = it.countLike + if (it.likeByMe) -1 else +1
+                    likedByMe = !it.likedByMe,
+                    likes = it.likes + if (it.likedByMe) -1 else +1
                 )
             }
         }
@@ -73,7 +72,7 @@ class FilePostRepository(
     override fun share(postID: Long) {
         posts = posts.map {
             if (it.id != postID) it
-            else it.copy(countShare = it.countShare + 1)
+            else it.copy(reposts = it.reposts + 1)
         }
     }
 

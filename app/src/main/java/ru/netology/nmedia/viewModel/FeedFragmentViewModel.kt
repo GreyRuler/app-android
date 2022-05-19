@@ -5,8 +5,9 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.Post
 import ru.netology.nmedia.adapter.PostInteractionListener
+import ru.netology.nmedia.db.AppDb
 import ru.netology.nmedia.repo.PostRepository
-import ru.netology.nmedia.repo.impl.FilePostRepository
+import ru.netology.nmedia.repo.impl.SQLiteRepository
 import ru.netology.nmedia.util.SingleLiveEvent
 
 class FeedFragmentViewModel(
@@ -14,7 +15,11 @@ class FeedFragmentViewModel(
 ) : AndroidViewModel(application), PostInteractionListener {
 
     private val repository: PostRepository =
-        FilePostRepository.getInstance(application)
+        SQLiteRepository(
+            dao = AppDb.getInstance(
+                context = application
+            ).postDao
+        )
 
     val data by repository::data
 
@@ -34,8 +39,8 @@ class FeedFragmentViewModel(
             author = "Me",
             content = content,
             published = "Today",
-            countLike = 0,
-            countShare = 0,
+            likes = 0,
+            reposts = 0,
             url = url
         )
         repository.save(post)
