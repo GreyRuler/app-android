@@ -18,4 +18,5 @@
     <string name="play_video">Воспроизвести видео</string>
     <string name="preview_video">Превью для видео</string>
     <string name="url">Ссылка</string>
+    <string name="inputField">Введите текст поста…</string>
 </resources>
