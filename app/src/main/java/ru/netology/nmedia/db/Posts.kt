@@ -11,5 +11,5 @@ fun Cursor.toPost() = Post(
     likes = getInt(getColumnIndexOrThrow(PostsTable.Column.LIKES.columnName)),
     likedByMe = getInt(getColumnIndexOrThrow(PostsTable.Column.LIKED_BY_ME.columnName)) != 0,
     reposts = getInt(getColumnIndexOrThrow(PostsTable.Column.REPOSTS.columnName)),
-    url = getString(getColumnIndexOrThrow(PostsTable.Column.PUBLISHED.columnName))
+    url = getString(getColumnIndexOrThrow(PostsTable.Column.URL.columnName))
 )

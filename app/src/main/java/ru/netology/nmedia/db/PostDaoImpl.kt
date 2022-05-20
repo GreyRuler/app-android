@@ -2,6 +2,7 @@ package ru.netology.nmedia.db
 
 import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
+import android.util.Log
 import ru.netology.nmedia.Post
 
 class PostDaoImpl(
@@ -25,6 +26,7 @@ class PostDaoImpl(
             put(PostsTable.Column.AUTHOR.columnName, post.author)
             put(PostsTable.Column.CONTENT.columnName, post.content)
             put(PostsTable.Column.PUBLISHED.columnName, post.published)
+            put(PostsTable.Column.URL.columnName, post.url)
         }
         val id = if (post.id != 0L) {
             db.update(
@@ -33,7 +35,7 @@ class PostDaoImpl(
                 "${PostsTable.Column.ID.columnName} = ?",
                 arrayOf(post.id.toString())
             )
-        } else { // post.if == 0
+        } else { // post.id == 0L
             db.insert(PostsTable.NAME, null, values)
         }
 
@@ -55,7 +57,7 @@ class PostDaoImpl(
            UPDATE ${PostsTable.NAME} SET
                ${PostsTable.Column.LIKES.columnName} = ${PostsTable.Column.LIKES.columnName} + CASE WHEN ${PostsTable.Column.LIKED_BY_ME.columnName} THEN -1 ELSE 1 END,
                ${PostsTable.Column.LIKED_BY_ME.columnName} = CASE WHEN ${PostsTable.Column.LIKED_BY_ME.columnName} THEN 0 ELSE 1 END
-           WHERE id = ?;
+           WHERE ${PostsTable.Column.ID.columnName} = ?;
         """.trimIndent(),
             arrayOf(id)
         )
