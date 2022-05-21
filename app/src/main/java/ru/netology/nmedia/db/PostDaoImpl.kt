@@ -35,6 +35,7 @@ class PostDaoImpl(
                 "${PostsTable.Column.ID.columnName} = ?",
                 arrayOf(post.id.toString())
             )
+            post.id
         } else { // post.id == 0L
             db.insert(PostsTable.NAME, null, values)
         }
@@ -44,7 +45,7 @@ class PostDaoImpl(
             PostsTable.ALL_COLUMNS_NAMES,
             "${PostsTable.Column.ID.columnName} = ?",
             arrayOf(id.toString()),
-            null, null, null, null
+            null, null, null
         ).use { cursor ->
             cursor.moveToNext()
             cursor.toPost()
@@ -57,6 +58,17 @@ class PostDaoImpl(
            UPDATE ${PostsTable.NAME} SET
                ${PostsTable.Column.LIKES.columnName} = ${PostsTable.Column.LIKES.columnName} + CASE WHEN ${PostsTable.Column.LIKED_BY_ME.columnName} THEN -1 ELSE 1 END,
                ${PostsTable.Column.LIKED_BY_ME.columnName} = CASE WHEN ${PostsTable.Column.LIKED_BY_ME.columnName} THEN 0 ELSE 1 END
+           WHERE ${PostsTable.Column.ID.columnName} = ?;
+        """.trimIndent(),
+            arrayOf(id)
+        )
+    }
+
+    override fun shareById(id: Long) {
+        db.execSQL(
+            """
+           UPDATE ${PostsTable.NAME} SET
+               ${PostsTable.Column.REPOSTS.columnName} = ${PostsTable.Column.REPOSTS.columnName} + 1 
            WHERE ${PostsTable.Column.ID.columnName} = ?;
         """.trimIndent(),
             arrayOf(id)

@@ -21,27 +21,25 @@ class SQLiteRepository(
         val saved = dao.save(post)
         data.value = if (id == 0L) {
             listOf(saved) + posts
-        } else {
-            posts.map {
-                if (it.id != id) it else saved
-            }
+        } else posts.map {
+            if (it.id != id) it else saved
         }
     }
+
 
     override fun like(postID: Long) {
         dao.likeById(postID)
         data.value = posts.map {
-            if (it.id != postID) it
-            else {
-                it.copy(
-                    likedByMe = !it.likedByMe,
-                    likes = it.likes + if (it.likedByMe) -1 else +1
-                )
-            }
+            if (it.id != postID) it else it.copy(
+                likedByMe = !it.likedByMe,
+                likes = if (it.likedByMe) it.likes - 1 else it.likes + 1
+            )
         }
     }
 
+
     override fun share(postID: Long) {
+        dao.shareById(postID)
         data.value = posts.map {
             if (it.id != postID) it
             else it.copy(reposts = it.reposts + 1)
