@@ -10,16 +10,12 @@ import ru.netology.nmedia.repo.PostRepository
 import ru.netology.nmedia.repo.impl.SQLiteRepository
 import ru.netology.nmedia.util.SingleLiveEvent
 
-class FeedFragmentViewModel(
+class FeedViewModel(
     application: Application
 ) : AndroidViewModel(application), PostInteractionListener {
 
     private val repository: PostRepository =
-        SQLiteRepository(
-            dao = AppDb.getInstance(
-                context = application
-            ).postDao
-        )
+        SQLiteRepository.getInstance(application)
 
     val data by repository::data
 

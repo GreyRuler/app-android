@@ -1,7 +1,9 @@
 package ru.netology.nmedia.repo.impl
 
+import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.Post
+import ru.netology.nmedia.db.AppDb
 import ru.netology.nmedia.db.PostDao
 import ru.netology.nmedia.repo.PostRepository
 
@@ -26,7 +28,6 @@ class SQLiteRepository(
         }
     }
 
-
     override fun like(postID: Long) {
         dao.likeById(postID)
         data.value = posts.map {
@@ -36,7 +37,6 @@ class SQLiteRepository(
             )
         }
     }
-
 
     override fun share(postID: Long) {
         dao.shareById(postID)
@@ -49,5 +49,14 @@ class SQLiteRepository(
     override fun delete(postID: Long) {
         dao.removeById(postID)
         data.value = posts.filter { it.id != postID }
+    }
+
+    companion object {
+        private var instance: SQLiteRepository? = null
+        fun getInstance(app: Application) = instance ?: SQLiteRepository(
+            dao = AppDb.getInstance(
+                context = app
+            ).postDao
+        ).also { instance = it }
     }
 }
