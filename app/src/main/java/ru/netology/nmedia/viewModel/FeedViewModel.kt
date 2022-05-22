@@ -5,9 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import ru.netology.nmedia.Post
 import ru.netology.nmedia.adapter.PostInteractionListener
-import ru.netology.nmedia.db.AppDb
 import ru.netology.nmedia.repo.PostRepository
-import ru.netology.nmedia.repo.impl.SQLiteRepository
+import ru.netology.nmedia.repo.impl.PostRepositoryImpl
 import ru.netology.nmedia.util.SingleLiveEvent
 
 class FeedViewModel(
@@ -15,7 +14,7 @@ class FeedViewModel(
 ) : AndroidViewModel(application), PostInteractionListener {
 
     private val repository: PostRepository =
-        SQLiteRepository.getInstance(application)
+        PostRepositoryImpl.getInstance(application)
 
     val data by repository::data
 
