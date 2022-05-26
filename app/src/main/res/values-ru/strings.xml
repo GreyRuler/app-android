@@ -19,4 +19,8 @@
     <string name="preview_video">Превью для видео</string>
     <string name="url">Ссылка</string>
     <string name="inputField">Введите текст поста…</string>
+    <string name="notification_user_liked">%1$s поставил лайк посту %2$s</string>
+    <string name="channel_remote_name">Уведомления с сервера</string>
+    <string name="channel_remote_description">Уведомления с удалённого сервера</string>
+    <string name="notification_user_post">%1$s опубликовал новый пост:</string>
 </resources>
